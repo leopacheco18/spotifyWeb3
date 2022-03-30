@@ -1,0 +1,143 @@
+.addYear > div {
+  background-color: unset !important;
+  color: white;
+  font-size: 20px;
+  width: 100%;
+}
+
+.addYear > div > div > input {
+  font-size: 20px;
+  font-weight: 500;
+  color: white;
+}
+
+.addYear > div > div > span {
+  color: white;
+}
+
+.addTitle > input:focus,
+.addYear > .ant-picker-focused,
+.addGenre > .ant-select-focused > div {
+  border-color: #1db954 !important;
+  box-shadow: 0 0 0 2px rgb(29 185 84 / 20%) !important;
+}
+
+.addTitle > input {
+  background-color: unset !important;
+  color: white;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.addYear,
+.addGenre {
+  width: 50%;
+}
+
+.addGenre > div {
+  font-size: 20px;
+  font-weight: 500;
+  width: 100%;
+}
+
+.addGenre > div > div {
+  background-color: unset !important;
+  color: white;
+  height: auto !important;
+  padding: 5px 11px 4px !important;
+}
+
+.addGenre > div > span {
+  color: white;
+}
+
+.addTitle,
+.addYear,
+.addGenre {
+  margin: 0.5rem 0;
+}
+
+.newAlbumDeets {
+  display: flex;
+  flex-direction: column;
+  color: rgb(205, 203, 203);
+  width: calc(45% - 230px);
+}
+.two-columns {
+  display: flex;
+  gap: 15px;
+}
+
+.coverBody {
+  position: relative;
+}
+
+.coverBody:hover > .coverDeleteBody {
+  opacity: 1;
+  transition: all 0.3s;
+}
+
+.uploadSection {
+  width: calc(85% - 260px);
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
+.uploadSection > button {
+  background-color: #1db954;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  padding: 5px 15px;
+  color: white;
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+.coverDeleteBody {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  opacity: 0;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+}
+
+.coverDelete {
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  cursor: pointer;
+  background-color: #8b0000;
+  color: white;
+  font-size: 24px;
+  border: none;
+}
+
+.coverDelete:active {
+  background-color: #610000;
+}
+
+.newTitleHeader {
+  width: 80%;
+  padding-left: 5%;
+  display: flex;
+  justify-content: start;
+}
+
+.newTitleHeader > input:focus {
+  border-color: #1db954;
+  box-shadow: 0 0 0 2px rgb(29 185 84 / 20%);
+}
+
+.newTitleHeader > input {
+  background-color: unset !important;
+  color: white;
+  font-size: 20px;
+  font-weight: 500;
+}
