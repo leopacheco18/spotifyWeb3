@@ -9,6 +9,7 @@ import Spotify from "./images/Spotify.png";
 import { SearchOutlined, PlusCircleOutlined } from "@ant-design/icons";
 import AudioPlayer from "./components/AudioPlayer";
 import { useMoralis } from "react-moralis";
+import SearchAlbum from "./pages/SearchAlbum/SearchAlbum";
 
 const { Footer, Sider, Content } = Layout;
 
@@ -17,6 +18,7 @@ const App = () => {
   const { isAuthenticated, authenticate, authError, logout, chainId } =
     useMoralis();
   const [nftAlbum, setNftAlbum] = useState();
+  const [searchAlbum, setSearchAlbum] = useState("");
   useEffect(() => {
     if (authError && authError.message) {
       notification.error({
@@ -35,7 +37,8 @@ const App = () => {
               suffix={
                 <SearchOutlined style={{ fontSize: "30px", color: "white" }} />
               }
-              placeholder="Search"
+              placeholder="Search by album"
+              onChange={(e) => setSearchAlbum(e.target.value)}
             />
           </div>
           <Link to="/">
@@ -72,15 +75,22 @@ const App = () => {
           )}
         </Sider>
         <Content className="contentWindow">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route
-              path="/album"
-              element={<Album setNftAlbum={setNftAlbum} />}
+          {searchAlbum.trim() !== "" ? (
+            <SearchAlbum
+              searchVal={searchAlbum}
+              setSearchVal={setSearchAlbum}
             />
+          ) : (
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route
+                path="/album"
+                element={<Album setNftAlbum={setNftAlbum} />}
+              />
 
-            <Route path="/newAlbum" element={<NewAlbum />} />
-          </Routes>
+              <Route path="/newAlbum" element={<NewAlbum />} />
+            </Routes>
+          )}
         </Content>
       </Layout>
       {nftAlbum && (
