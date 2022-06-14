@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { BrowserRouter } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 import { MoralisProvider } from "react-moralis";
 
 ReactDOM.render(
@@ -12,9 +12,9 @@ ReactDOM.render(
       appId="Jp67mIueDKnjLqv7fhfbVPa3gnVPVHCbX7jbRXNy"
       serverUrl="https://108tjiucyv7n.usemoralis.com:2053/server"
     >
-      <BrowserRouter>
+      <HashRouter>
         <App />
-      </BrowserRouter>
+      </HashRouter>
     </MoralisProvider>
   </React.StrictMode>,
   document.getElementById("root")
