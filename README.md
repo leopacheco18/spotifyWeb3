@@ -28,8 +28,7 @@ Be sure to have enough MATIC, get some [here](https://mumbaifaucet.com/).
 
 ![Form new album](https://user-images.githubusercontent.com/47113025/173478408-9b2a6c3b-b865-428a-94ae-3b9dfbbac8a0.png)
 
-![Add new song filled](https://user-images.githubusercontent.com/47113025/173478432-1971797c-e352-4de7-b899-eebfe7fcc696.png)
-
+![New Album form filled](https://user-images.githubusercontent.com/47113025/173479438-42a3d676-5f2a-410d-bd2a-21541ccd2dec.png)
 
 5. Did you miss to upload any song? Don't worry. If you are the owner you can add new songs
 
