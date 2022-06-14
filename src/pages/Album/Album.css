@@ -14,7 +14,6 @@
 .topBan {
   display: flex;
   gap: 30px;
-  flex-wrap: wrap;
 }
 
 .albumCover {
@@ -146,6 +145,7 @@
   .topBan {
     justify-content: center;
     gap: 10px;
+    flex-wrap: wrap;
   }
   .title{
     font-size: 24px;

@@ -211,13 +211,14 @@ const NewAlbum = () => {
     }
     setUploadingAlbum(true);
     const coverFile = cover[0];
-
-    saveFile(formAlbum.title + "_cover.jpeg", coverFile, { saveIPFS: true });
+    let title = formAlbum.title.replace(/([^a-z0-9]+)/gi, " ");
+    saveFile( title + "_cover.jpeg", coverFile, { saveIPFS: true });
   };
 
   const uploadSongs = () => {
     songs.forEach((song) => {
-      saveSong(song.titleSong + "." + song.extension, song, { saveIPFS: true });
+      let name = song.titleSong.replace(/([^a-z0-9]+)/gi, " ");
+      saveSong(name + "." + song.extension, song, { saveIPFS: true });
     });
   };
 
