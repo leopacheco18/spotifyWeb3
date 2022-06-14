@@ -5,34 +5,29 @@ import { Tabs } from "antd";
 import { useMoralisQuery } from "react-moralis";
 const { TabPane } = Tabs;
 
-const SearchAlbum = ({ searchVal, setSearchVal }) => {
+const SearchAlbum = ({ searchVal, setSearchValue, globalAlbum }) => {
   const [library, setLibrary] = useState([]);
-  const { fetch, data } = useMoralisQuery(
-    "Album",
-    (query) => query.matches("title", searchVal),
-    [searchVal],
-    {
-      live: true,
+
+    useEffect(() => {
+      searchInAlbum();
+    }, [searchVal]);
+
+    const searchInAlbum = () => {
+      let arr = [];
+      globalAlbum.forEach(item => {
+        if(item.get("title").toLowerCase().includes(searchVal.toLowerCase())) arr.push(item)
+      })
+      setLibrary(arr);
     }
-  );
-
-  //   useEffect(() => {
-  //     fetch();
-  //   }, []);
-
-  useEffect(() => {
-    setLibrary(data);
-  }, [data]);
 
   return (
     <>
-      <Tabs defaultActiveKey="1" centered>
-        <TabPane tab="FEATURED" key="1">
-          <h1 className="featuredTitle">Today Is The Day</h1>
-
-          <div className="albums">
-            {library.map((album) => (
+    <h1 className="featuredTitle">Search...</h1>
+    <div className="albums">
+            {library.map((album, i) => (
               <Link
+              key={i}
+              onClick={() => setSearchValue("")}
                 to="/album"
                 state={JSON.stringify(album)}
                 className="albumSelection"
@@ -40,80 +35,14 @@ const SearchAlbum = ({ searchVal, setSearchVal }) => {
                 <img
                   src={album.get("image")}
                   alt="bull"
-                  style={{ width: "150px", marginBottom: "10px" }}
+                  style={{ width: "200px", marginBottom: "10px" ,  height: '200px' }}
                 />
 
                 <p>{album.get("title")}</p>
               </Link>
             ))}
           </div>
-        </TabPane>
-        <TabPane tab="GENRED & MOODS" key="2">
-          <h1 className="featuredTitle">Top hits</h1>
-          <div className="albums">
-            {library.slice(5, 11).map((album) => (
-              <Link
-                to="/album"
-                state={JSON.stringify(album)}
-                className="albumSelection"
-              >
-                <img
-                  src={album.image}
-                  alt="bull"
-                  style={{ width: "150px", marginBottom: "10px" }}
-                />
-
-                <p>{album.title}</p>
-              </Link>
-            ))}
-          </div>
-          <h1 className="featuredTitle">Country</h1>
-          <div className="albums">
-            {library.slice(0, 6).map((album) => (
-              <Link to="/album" state={album} className="albumSelection">
-                <img
-                  src={album.image}
-                  alt="bull"
-                  style={{ width: "150px", marginBottom: "10px" }}
-                />
-
-                <p>{album.title}</p>
-              </Link>
-            ))}
-          </div>
-          <h1 className="featuredTitle">Classics</h1>
-          <div className="albums">
-            {library.slice(7, 13).map((album) => (
-              <Link to="/album" state={album} className="albumSelection">
-                <img
-                  src={album.image}
-                  alt="bull"
-                  style={{ width: "150px", marginBottom: "10px" }}
-                />
-
-                <p>{album.title}</p>
-              </Link>
-            ))}
-          </div>
-        </TabPane>
-        <TabPane tab="NEW RELEASES" key="3">
-          <h1 className="featuredTitle">News</h1>
-          <div className="albums">
-            {library.slice(7, 13).map((album) => (
-              <Link to="/album" state={album} className="albumSelection">
-                <img
-                  src={album.image}
-                  alt="bull"
-                  style={{ width: "150px", marginBottom: "10px" }}
-                />
-
-                <p>{album.title}</p>
-              </Link>
-            ))}
-          </div>
-        </TabPane>
-      </Tabs>
-    </>
+          </>
   );
 };
 

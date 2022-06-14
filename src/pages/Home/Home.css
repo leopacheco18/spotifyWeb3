@@ -1,3 +1,6 @@
+.tabs-padding{
+  padding: 0 30px !important;
+}
 .featuredTitle {
   color: white;
   font-size: 35px;
@@ -30,4 +33,9 @@
 .albumSelection:hover {
   color: white;
   transform: scale(1.05);
+}
+@media only screen and (max-width: 800px) {
+  .featuredTitle {
+    font-size: 24px;
+  }
 }

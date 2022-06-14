@@ -10,6 +10,10 @@
   width: 300px;
   justify-content: end;
 }
+.footer-content {
+  width: 300px;
+  justify-content: "start";
+}
 
 .pauseplay {
   font-size: 35px;
@@ -60,4 +64,11 @@
 
 .songAlbum {
   font-size: 12px;
+}
+
+@media only screen and (max-width: 800px) {
+  .footer-content {
+    width: 100%;
+    justify-content: space-between;
+  }
 }

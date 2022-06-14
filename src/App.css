@@ -106,6 +106,7 @@
 .logo {
   width: 50px;
   margin-bottom: 20px;
+  cursor: pointer;
 }
 
 .login {
@@ -157,6 +158,7 @@
   font-size: 20px;
   font-weight: 500;
   letter-spacing: 1px;
+  transition: all 0.5s;
 }
 
 .recentPlayed {
@@ -184,6 +186,8 @@
   padding: 50px 0px;
   max-height: 100vh;
   overflow: auto;
+  
+  position: relative;
 }
 
 .footer {
@@ -191,6 +195,7 @@
   width: 100%;
   bottom: 0;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   background-color: #292929;
@@ -217,3 +222,12 @@
 .contentWindow::-webkit-scrollbar-thumb:hover {
   background: #1db954;
 }
+
+@media only screen and (max-width: 800px) {
+  .sideBar {
+    padding: 15px;
+  }
+  .ant-layout-footer{
+    padding: 10px;
+  }
+} 

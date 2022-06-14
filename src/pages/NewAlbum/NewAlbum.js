@@ -127,6 +127,7 @@ const NewAlbum = () => {
         _year: formAlbum.year,
       },
     };
+    
     fetch({ params: options }).then((r) => {
       if (r) {
         setUploadingAlbum(false);

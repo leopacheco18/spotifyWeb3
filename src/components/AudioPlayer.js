@@ -11,8 +11,9 @@ import {
   PauseCircleFilled,
 } from "@ant-design/icons";
 
-export default function AudioPlayer({ nftAlbum }) {
+export default function AudioPlayer({ nftAlbum , indexToPlay}) {
   const { resolveLink } = useIPFS();
+  const isMobile = window.innerWidth < 800;
   const [
     playing,
     duration,
@@ -23,8 +24,8 @@ export default function AudioPlayer({ nftAlbum }) {
     onSearch,
     onSearchEnd,
     onVolume,
-    trackIndex,
-  ] = useAudio(nftAlbum);
+    trackIndex
+  ] = useAudio(nftAlbum, indexToPlay);
 
   const minSec = (secs) => {
     const minutes = Math.floor(secs / 60);
@@ -38,8 +39,7 @@ export default function AudioPlayer({ nftAlbum }) {
   return (
     <>
       <div
-        className="buttons"
-        style={{ width: "300px", justifyContent: "start" }}
+        className="buttons footer-content"
       >
         <img
           className="cover"
@@ -52,8 +52,20 @@ export default function AudioPlayer({ nftAlbum }) {
           </div>
           <div className="songAlbum">{nftAlbum[trackIndex].title}</div>
         </div>
+        {isMobile && 
+        <div className="buttons">
+        <StepBackwardOutlined className="forback" onClick={toPrevTrack} />
+        {playing ? (
+          <PauseCircleFilled className="pauseplay" onClick={toggle} />
+        ) : (
+          <PlayCircleFilled className="pauseplay" onClick={toggle} />
+        )}
+        <StepForwardOutlined className="forback" onClick={toNextTrack} />
+      </div>
+        }
       </div>
       <div>
+      {!isMobile && 
         <div className="buttons">
           <StepBackwardOutlined className="forback" onClick={toPrevTrack} />
           {playing ? (
@@ -63,6 +75,7 @@ export default function AudioPlayer({ nftAlbum }) {
           )}
           <StepForwardOutlined className="forback" onClick={toNextTrack} />
         </div>
+}
         <div className="buttons">
           {minSec(trackProgress)}
           <Slider
@@ -78,6 +91,7 @@ export default function AudioPlayer({ nftAlbum }) {
           {duration ? minSec(Math.round(duration)) : "00:00"}
         </div>
       </div>
+      {!isMobile &&
       <div className="soundDiv">
         <SoundOutlined />
         <Slider
@@ -87,6 +101,7 @@ export default function AudioPlayer({ nftAlbum }) {
           onChange={(value) => onVolume(value / 100)}
         />
       </div>
+      }
     </>
   );
 }

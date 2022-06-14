@@ -15,10 +15,15 @@ const { Footer, Sider, Content } = Layout;
 
 const App = () => {
   const navigate = useNavigate();
-  const { isAuthenticated, authenticate, authError, logout, chainId } =
+  const isMobile = window.innerWidth < 800;
+  const [closeMenu, setCloseMenu] = useState(isMobile)
+  const [indexToPlay, setIndexToPlay] = useState(0)
+  const { isAuthenticated, authenticate, authError, logout } =
     useMoralis();
+  const [globalAlbum, setGlobalAlbum] = useState([]);
   const [nftAlbum, setNftAlbum] = useState();
   const [searchAlbum, setSearchAlbum] = useState("");
+
   useEffect(() => {
     if (authError && authError.message) {
       notification.error({
@@ -30,8 +35,10 @@ const App = () => {
   return (
     <Layout>
       <Layout>
-        <Sider width={300} className="sideBar">
-          <img src={Spotify} alt="Logo" className="logo" />
+        <Sider width={(closeMenu ? '80' : '300')} className="sideBar" style={{padding : (closeMenu && '15px')}}>
+          <img src={Spotify} alt="Logo" className="logo" onClick={() => setCloseMenu(!closeMenu)} />
+          <div style={{display: (closeMenu ? 'none' : 'block')}}>
+          
           <div className="searchBar">
             <Input
               suffix={
@@ -73,19 +80,22 @@ const App = () => {
               <button onClick={authenticate}>Login with Metamask</button>
             </div>
           )}
+          </div>
+          
         </Sider>
         <Content className="contentWindow">
           {searchAlbum.trim() !== "" ? (
             <SearchAlbum
               searchVal={searchAlbum}
-              setSearchVal={setSearchAlbum}
+              setSearchValue={setSearchAlbum}
+              globalAlbum={globalAlbum}
             />
           ) : (
             <Routes>
-              <Route path="/" element={<Home />} />
+              <Route path="/" element={<Home setGlobalAlbum={setGlobalAlbum} />} />
               <Route
                 path="/album"
-                element={<Album setNftAlbum={setNftAlbum} />}
+                element={<Album setNftAlbum={setNftAlbum} setIndexToPlay={setIndexToPlay} />}
               />
 
               <Route path="/newAlbum" element={<NewAlbum />} />
@@ -95,7 +105,7 @@ const App = () => {
       </Layout>
       {nftAlbum && (
         <Footer className="footer">
-          <AudioPlayer nftAlbum={nftAlbum} />
+          <AudioPlayer nftAlbum={nftAlbum} indexToPlay={indexToPlay} />
         </Footer>
       )}
     </Layout>

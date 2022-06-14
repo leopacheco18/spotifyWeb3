@@ -5,8 +5,12 @@ import { Tabs } from "antd";
 import { useMoralisQuery } from "react-moralis";
 const { TabPane } = Tabs;
 
-const Home = () => {
+const Home = ({setGlobalAlbum}) => {
+  
+  const isMobile = window.innerWidth < 800;
   const [library, setLibrary] = useState([]);
+  const [pop, setPop] = useState([]);
+  const [rock, setRock] = useState([]);
   const { fetch, data } = useMoralisQuery(
     "Album",
     (query) => query.equalTo("confirmed", true),
@@ -21,17 +25,33 @@ const Home = () => {
 
   useEffect(() => {
     setLibrary(data);
+    getPopsAndRock();
+    setGlobalAlbum(data);
   }, [data]);
+
+
+  const getPopsAndRock = () => {
+    let arrPop = [];
+    let arrRock = [];
+    data.forEach(item => {
+      if(item.get("genre") === 'Pop') arrPop.push(item)
+      if(item.get("genre") === 'Rock') arrRock.push(item)
+    })
+    setPop(arrPop);
+    setRock(arrRock);
+  }
+  
 
   return (
     <>
-      <Tabs defaultActiveKey="1" centered>
+      <Tabs defaultActiveKey="1" centered className="tabs-padding">
         <TabPane tab="FEATURED" key="1">
           <h1 className="featuredTitle">Today Is The Day</h1>
 
           <div className="albums">
-            {library.map((album) => (
+            {library.map((album,i) => (
               <Link
+                key={i}
                 to="/album"
                 state={JSON.stringify(album)}
                 className="albumSelection"
@@ -39,7 +59,7 @@ const Home = () => {
                 <img
                   src={album.get("image")}
                   alt="bull"
-                  style={{ width: "150px", marginBottom: "10px" }}
+                  style={{ width: "200px", marginBottom: "10px", height: '200px' }}
                 />
 
                 <p>{album.get("title")}</p>
@@ -47,66 +67,46 @@ const Home = () => {
             ))}
           </div>
         </TabPane>
-        <TabPane tab="GENRED & MOODS" key="2">
-          <h1 className="featuredTitle">Top hits</h1>
+        <TabPane tab="Pop" key="2">
+          <h1 className="featuredTitle">All Pops Songs</h1>
           <div className="albums">
-            {library.slice(5, 11).map((album) => (
+          {pop.map((album,i) => (
               <Link
+                key={i}
                 to="/album"
                 state={JSON.stringify(album)}
                 className="albumSelection"
               >
                 <img
-                  src={album.image}
+                  src={album.get("image")}
                   alt="bull"
-                  style={{ width: "150px", marginBottom: "10px" }}
+                  style={{ width: "200px", marginBottom: "10px", height: '200px' }}
                 />
 
-                <p>{album.title}</p>
+                <p>{album.get("title")}</p>
               </Link>
             ))}
           </div>
-          <h1 className="featuredTitle">Country</h1>
-          <div className="albums">
-            {library.slice(0, 6).map((album) => (
-              <Link to="/album" state={album} className="albumSelection">
-                <img
-                  src={album.image}
-                  alt="bull"
-                  style={{ width: "150px", marginBottom: "10px" }}
-                />
-
-                <p>{album.title}</p>
-              </Link>
-            ))}
-          </div>
-          <h1 className="featuredTitle">Classics</h1>
-          <div className="albums">
-            {library.slice(7, 13).map((album) => (
-              <Link to="/album" state={album} className="albumSelection">
-                <img
-                  src={album.image}
-                  alt="bull"
-                  style={{ width: "150px", marginBottom: "10px" }}
-                />
-
-                <p>{album.title}</p>
-              </Link>
-            ))}
-          </div>
+        
+          
         </TabPane>
-        <TabPane tab="NEW RELEASES" key="3">
-          <h1 className="featuredTitle">News</h1>
+        <TabPane tab="Rock" key="3">
+          <h1 className="featuredTitle">All Rock Songs</h1>
           <div className="albums">
-            {library.slice(7, 13).map((album) => (
-              <Link to="/album" state={album} className="albumSelection">
+          {rock.map((album,i) => (
+              <Link
+                key={i}
+                to="/album"
+                state={JSON.stringify(album)}
+                className="albumSelection"
+              >
                 <img
-                  src={album.image}
+                  src={album.get("image")}
                   alt="bull"
-                  style={{ width: "150px", marginBottom: "10px" }}
+                  style={{ width: "200px", marginBottom: "10px", height: '200px' }}
                 />
 
-                <p>{album.title}</p>
+                <p>{album.get("title")}</p>
               </Link>
             ))}
           </div>
