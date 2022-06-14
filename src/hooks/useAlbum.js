@@ -14,7 +14,6 @@ export const useAlbum = (contract) => {
 
   useEffect(() => {
     if (isInitialized && !albumDetails) {
-      console.log("aqui");
       fetchAlbum().then(async (songs) => {
         await enableWeb3();
         for (let i = 0; i < songs.result.length; i++) {
@@ -52,13 +51,8 @@ export const useAlbum = (contract) => {
                 let url = `https://gateway.moralisipfs.com/ipfs/${ipfsHash}`;
                 let response = await fetch(url);
                 let jsonToAdd = await response.text();
-                console.log(i);
                 songs.result[i].metadata = jsonToAdd;
-                // jsonToAdd.token_id = item;
-                // arr.push(jsonToAdd);
-                // if (item === 0) {
-                //   setCertificateDetails(arr);
-                // }
+              
               },
               onError: console.log,
             });

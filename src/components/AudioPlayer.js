@@ -64,7 +64,7 @@ export default function AudioPlayer({ nftAlbum , indexToPlay}) {
       </div>
         }
       </div>
-      <div>
+      <div style={{width: '100%'}}>
       {!isMobile && 
         <div className="buttons">
           <StepBackwardOutlined className="forback" onClick={toPrevTrack} />

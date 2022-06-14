@@ -65,7 +65,6 @@ const useAudio = (url, index) => {
 
   const playSong = () => {
     audioRef.current.pause();
-    console.log("trackIndex",trackIndex);
     audioRef.current = new Audio(
       resolveLink(JSON.parse(audio[trackIndex].metadata).animation_url)
     );
