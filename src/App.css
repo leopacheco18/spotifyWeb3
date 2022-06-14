@@ -190,8 +190,11 @@
   position: relative;
 }
 
+.layout-own{
+  min-height: unset !important;
+}
+
 .footer {
-  position: fixed;
   width: 100%;
   bottom: 0;
   display: flex;
@@ -199,6 +202,7 @@
   align-items: center;
   background-color: #292929;
   color: rgb(205, 203, 203) !important;
+  transition: all 0.5s ;
 }
 
 .contentWindow::-webkit-scrollbar {

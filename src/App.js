@@ -18,6 +18,7 @@ const App = () => {
   const isMobile = window.innerWidth < 800;
   const [closeMenu, setCloseMenu] = useState(isMobile)
   const [indexToPlay, setIndexToPlay] = useState(0)
+  const [height, setHeight] = useState(0);
   const { isAuthenticated, authenticate, authError, logout } =
     useMoralis();
   const [globalAlbum, setGlobalAlbum] = useState([]);
@@ -32,9 +33,18 @@ const App = () => {
     }
   }, [authError]);
 
+  useEffect(() => {
+    if(nftAlbum && height === 0){
+      let item = document.getElementsByClassName('footer')[0];
+      let height = item.offsetHeight + (isMobile ? 20 : 19);
+      
+      setHeight(height);
+    }
+  },[nftAlbum])
+
   return (
     <Layout>
-      <Layout>
+      <Layout className="layout-own" style={{height: ('calc(100vh - ' + height +'px)')}}>
         <Sider width={(closeMenu ? '80' : '300')} className="sideBar" style={{padding : (closeMenu && '15px')}}>
           <img src={Spotify} alt="Logo" className="logo" onClick={() => setCloseMenu(!closeMenu)} />
           <div style={{display: (closeMenu ? 'none' : 'block')}}>
@@ -103,11 +113,11 @@ const App = () => {
           )}
         </Content>
       </Layout>
+        <Footer className="footer" style={{height: (!nftAlbum && '0px'), padding: (!nftAlbum && '0px') }}>
       {nftAlbum && (
-        <Footer className="footer">
           <AudioPlayer nftAlbum={nftAlbum} indexToPlay={indexToPlay} />
+          )}
         </Footer>
-      )}
     </Layout>
   );
 };
