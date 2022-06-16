@@ -1,5 +1,7 @@
 # Spotify Web 3 Project
 
+The Smart Contract repos is here: https://github.com/leopacheco18/spotifyWeb3Contracts
+
 This project try to replicate spotify but with web3 tech. Any artist can upload a new album and this new album will be a Smart Contract and the songs will be NTF's minted from this new smart contract. You can play the songs and also see on OpenSea
 
 ## Live Demo of the Project
